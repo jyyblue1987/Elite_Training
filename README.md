@@ -24,7 +24,10 @@ An Example User:
 
 ```javascript
 {
-  
+  username: "",
+  hash: "",
+  email: "",
+  wourkouts: "",
 }
 ```
 
@@ -32,6 +35,12 @@ An Example List with Embedded Items:
 
 ```javascript
 {
+ user: " ",
+ workoutTitle: "",
+ workoutTime: "",
+ workoutDifficulty: "",
+ workoutContent: "",
+ 
 
 }
 ```
@@ -69,7 +78,7 @@ An Example List with Embedded Items:
 ![sampleworkout](documentation/sampleworkout.png)
 
 ## Site map
-
+Arrows might be invisibe if using dark mode on github. Switch to light mode to see arrows. 
 ![sitemap](documentation/sitemap.png)
 
 

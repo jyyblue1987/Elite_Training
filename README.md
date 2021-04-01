@@ -19,15 +19,12 @@ The application will store Users and Workout plans
 * users can have multiple workout plans 
 * each list can have multiple workout plans
 
-(___TODO__: sample documents_)
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
+  
 }
 ```
 
@@ -35,20 +32,10 @@ An Example List with Embedded Items:
 
 ```javascript
 {
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+
 }
 ```
 
-
-## [Link to Commented First Draft Schema](db.js) 
-
-(___TODO__: create a first draft of your Schemas in db.js and link to it_)
 
 ## Wireframes
 
@@ -56,21 +43,27 @@ An Example List with Embedded Items:
 
 /homepage - page for login or signup.
 ![homepage](documentation/homepage.png)
+<br />
 
 /signup - page for signup.
 ![signup](documentation/signup.png)
+<br />
 
 /login - page for login.
 ![login](documentation/login.png)
+<br />
 
 /workoutplans - page for selecting the type of workout plans.
 ![workoutplans](documentation/workoutplans.png)
+<br />
 
 /lifting - page for choosing what body area to target.
 ![lifting](documentation/lifting.png)
+<br />
 
 /cardio - page for choosing were they want to do the cardio.
 ![cardio](documentation/cardio.png)
+<br />
 
 /sampleworkout - sample page of user created workout.
 ![sampleworkout](documentation/sampleworkout.png)
@@ -83,7 +76,7 @@ An Example List with Embedded Items:
 
 ## User Stories or Use Cases
 
-(___TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
+
 
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
@@ -94,7 +87,6 @@ An Example List with Embedded Items:
 
 ## Research Topics
 
-(___TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
 
 * (4 points) I am going to use client-side JavaScript library React
     * I'm going to be using React for the client-side. It is not the most challenging library, but it also isn't easy.
@@ -103,7 +95,7 @@ An Example List with Embedded Items:
 * (2 points) Incorperate weather API on the cardio page
     * I will be adding a weather API to the cardio page so users can decide what is the best choice
 
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
+8 out of the 8 required points
 
 
 ## [Link to Initial Main Project File](app.js) 

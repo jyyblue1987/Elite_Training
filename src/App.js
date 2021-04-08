@@ -2,6 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import './index.css';
 import Login from './pages/Login'
+import Register from './pages/Register'
+import Home from './pages/Home'
+import Lifting from './pages/Lifting'
 
 import {
 	BrowserRouter as Router,
@@ -21,20 +24,6 @@ function App() {
 				</div>
 			</nav>
 			
-			<nav>
-				<ul>
-					<li>
-						<Link to="/">Home</Link>
-					</li>
-					<li>
-						<Link to="/login">Login</Link>
-					</li>
-					<li>
-						<Link to="/register">Users</Link>
-					</li>
-				</ul>
-			</nav>
-			
 
 			{/* A <Switch> looks through its children <Route>s and
 				renders the first one that matches the current URL. */}
@@ -45,23 +34,19 @@ function App() {
 				<Route path="/login">
 					<Login />
 				</Route>
+				<Route path="/lifting">
+					<Lifting />
+				</Route>
+
 				<Route path="/">
 					<Home />
 				</Route>
+
 			</Switch>
 		</div>
     </Router>
   );
 }
 
-function Home() {
-	return <h2>Home</h2>;
-}
-
-
-
-function Register() {
-	return <h2>Register</h2>;
-}
 
 export default App;

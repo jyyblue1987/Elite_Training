@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import Home from './pages/Home'
 import Lifting from './pages/Lifting'
 import Workout from './pages/Workout'
+import WorkoutAdd from './pages/WorkoutAdd'
 
 import {
 	BrowserRouter as Router,
@@ -40,6 +41,9 @@ function App() {
 				</Route>
 				<Route path="/workout/:category">
 					<Workout />
+				</Route>
+				<Route path="/add/workout">
+					<WorkoutAdd />
 				</Route>
 				<Route path="/">
 					<Home />

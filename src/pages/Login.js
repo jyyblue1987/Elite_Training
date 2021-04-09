@@ -1,13 +1,18 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
+import { AppContext } from "../context";
 
 const GLOBAL = require('../Globals');
+
+
 
 export default function Login() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [message, setMessage] = useState("")
+
+    const [isAuthenticated, userHasAuthenticated] = useContext(AppContext); 
 
     const history = useHistory();
 
@@ -33,8 +38,12 @@ export default function Login() {
                 if( data.code !== 200 )
                 {
                     setMessage(data.message);
+                    localStorage.setItem('login_flag', false);
+                    userHasAuthenticated(false);
                 }
                 else{
+                    userHasAuthenticated(true);
+                    localStorage.setItem('login_flag', true);
                     history.push("/");
                 }
             })

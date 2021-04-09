@@ -1,4 +1,10 @@
+import {useEffect} from 'react';
+
 export default function Login() {
+    useEffect(() => {
+        console.log("Login");
+    }, []);
+    
 	return (
         <div>
             <section className="flex flex-col">

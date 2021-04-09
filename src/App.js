@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Lifting from './pages/Lifting'
 import Workout from './pages/Workout'
 import WorkoutAdd from './pages/WorkoutAdd'
+import Weather from './pages/Weather'
 
 import {
 	BrowserRouter as Router,
@@ -44,6 +45,9 @@ function App() {
 				</Route>
 				<Route path="/add/workout">
 					<WorkoutAdd />
+				</Route>
+				<Route path="/cardio">
+					<Weather />
 				</Route>
 				<Route path="/">
 					<Home />

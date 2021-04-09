@@ -55,6 +55,27 @@ app.post('/register', (req, res) => {
           });
       });
 });
+
+app.post('/login', (req, res) => {
+  // login with username and password
+  auth.login(req.body.username, req.body.password,
+      function(error) {
+        var data = {code: 201, message: error.message};
+        res.send(data);
+      },
+      function(data) {
+          auth.startAuthenticatedSession(req, data,function(err) {
+            var data = {};
+            if (err) {
+              data = {code: 201, message: err.message};
+            } else {
+              data = {code: 200};
+            }
+            res.send(data);
+          })
+      });
+});
+
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {

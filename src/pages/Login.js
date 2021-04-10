@@ -4,14 +4,13 @@ import axios from 'axios';
 import { AppContext } from "../context";
 
 export default function Login() {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [message, setMessage] = useState("")
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
 
     const [isAuthenticated, userHasAuthenticated] = useContext(AppContext); 
 
     const history = useHistory();
-
 
     useEffect(() => {
         console.log("Login");
@@ -35,11 +34,13 @@ export default function Login() {
                 {
                     setMessage(data.message);
                     localStorage.setItem('login_flag', false);
+                    localStorage.setItem('user_id', "");
                     userHasAuthenticated(false);
                 }
                 else{
                     userHasAuthenticated(true);
                     localStorage.setItem('login_flag', true);
+                    localStorage.setItem('user_id', data.user_id);                                      
                     history.push("/");
                 }
             })

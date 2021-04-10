@@ -68,7 +68,7 @@ function App() {
 						/>	
 
 					<AuthenticatedRoute 
-						path="/add/workout" 
+						path="/add/workout/:category" 
 						component={WorkoutAdd} 
 						appProps={{ isAuthenticated }} 
 						/>	

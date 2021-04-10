@@ -8,6 +8,15 @@ import axios from 'axios';
 const GLOBAL = require('./Globals');
 axios.defaults.baseURL = GLOBAL.BASE_URL;
 
+axios.interceptors.request.use(function (config) {  
+    const token = localStorage.getItem('user_id');                                      
+    config.headers.Authorization =  token;    
+    return config;
+});
+
+// axios.defaults.headers.common['Authorization'] = 'Basic '+btoa('username:password');
+// axios.defaults.headers.common['Authorization'] = 'Bearer test';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

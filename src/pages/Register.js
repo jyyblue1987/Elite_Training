@@ -1,12 +1,16 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
+import { AppContext } from "../context";
 
 export default function Register() {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [message, setMessage] = useState("")
+
+    const [isAuthenticated, userHasAuthenticated] = useContext(AppContext); 
+
 
     const history = useHistory();
     
@@ -33,8 +37,14 @@ export default function Register() {
                 if( data.code !== 200 )
                 {
                     setMessage(data.message);
+                    localStorage.setItem('login_flag', false);
+                    localStorage.setItem('user_id', "");
+                    userHasAuthenticated(false);
                 }
                 else{
+                    userHasAuthenticated(true);
+                    localStorage.setItem('login_flag', true);
+                    localStorage.setItem('user_id', data.user_id);                                      
                     history.push("/");
                 }
             })

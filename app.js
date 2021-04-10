@@ -45,13 +45,13 @@ app.post('/register', (req, res) => {
       },
       function (data) {
           auth.startAuthenticatedSession(req, data,function(err) {
-              var data = {};
+              var result = {};
               if (err) {
-                data = {code: 201, message: err.message};
+                result = {code: 201, message: err.message};
               } else {
-                data = {code: 200};
+                result = {code: 200, user_id: data._id};
               }
-              res.send(data);
+              res.send(result);
           });
       });
 });
@@ -65,15 +65,31 @@ app.post('/login', (req, res) => {
       },
       function(data) {
           auth.startAuthenticatedSession(req, data,function(err) {
-            var data = {};
+            var result = {};
             if (err) {
-              data = {code: 201, message: err.message};
+              result = {code: 201, message: err.message};
             } else {
-              data = {code: 200};
+              result = {code: 200, user_id: data._id};
             }
-            res.send(data);
+            res.send(result);
           })
       });
+});
+
+app.post('/workout/add', (req, res) => {
+  // add new workout, if user is not logged in, redirect into login page
+  var data = req.body;
+
+  var user_id = req.header('Authorization');
+
+  if (user_id) {
+      // add new article
+      data.user_id = user_id;
+      res.send(data);
+      
+  } else {
+      res.send(data);
+  }
 });
 
 const port = process.env.PORT || 8080;

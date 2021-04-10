@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 require('./db');
 
 const auth = require('./auth.js');
-
+const workout = require('./models/workout.js');
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -85,10 +85,16 @@ app.post('/workout/add', (req, res) => {
   if (user_id) {
       // add new article
       data.user_id = user_id;
-      res.send(data);
-      
+
+      workout.add(user_id, data.category, data.title, data.time, data.difficulty, data.content,
+        function(err) {
+          res.send({code: 201, message: err.message});      
+        },
+        function(data) {
+          res.send({code: 200});      
+        });      
   } else {
-      res.send(data);
+      res.send({code: 201, message: 'Unauthorized User'});            
   }
 });
 

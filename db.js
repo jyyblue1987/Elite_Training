@@ -26,6 +26,9 @@ const WorkoutSchema = new Schema({
         ref: 'User',
         required: [true, 'userId is required']
     },
+    category: {
+        type: String
+    },
     title: {
         type: String
     },

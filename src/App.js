@@ -22,11 +22,10 @@ import {
   } from "react-router-dom";
 
 function App() {
-	const [isAuthenticated, userHasAuthenticated] = useState(false);
+	const [isAuthenticated, userHasAuthenticated] = useState(localStorage.getItem("login_flag") === "true");
 	
 	useEffect(() => {			
-		var flag = localStorage.getItem("login_flag");
-		userHasAuthenticated(flag === "true");
+
     }, []);
 
   return (

@@ -1,4 +1,8 @@
+import {useEffect, useState} from 'react';
+
+
 export default function Lifting() {
+
     return (
         <div className="p-8 flex justify-center font-sans">
             <div className="rounded bg-gray-200 w-64 p-2">

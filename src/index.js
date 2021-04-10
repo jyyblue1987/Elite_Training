@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import axios from 'axios';
+const GLOBAL = require('./Globals');
+axios.defaults.baseURL = GLOBAL.BASE_URL;
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

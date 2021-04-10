@@ -1,3 +1,5 @@
+import {useEffect, useState} from 'react';
+
 import {
     useParams
 } from "react-router-dom";
@@ -5,6 +7,16 @@ import {
 export default function Workout() {
     let { category } = useParams();
     console.log(category);
+
+    useEffect(() => {			
+        getWorkoutList()
+    }, []);
+
+    const getWorkoutList = async() => {
+        let response = await fetch('api/data')
+        response = await response.json()        
+    }
+
 
     return (
         <div>

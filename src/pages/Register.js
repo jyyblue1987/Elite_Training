@@ -2,8 +2,6 @@ import {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
-const GLOBAL = require('../Globals');
-
 export default function Register() {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
@@ -28,7 +26,7 @@ export default function Register() {
             crossdomain: true
           };
       
-        axios.post(GLOBAL.BASE_URL + `register`, data )
+        axios.post(`register`, data )
             .then(res => {
                 var data = res.data;
                 console.log(data);

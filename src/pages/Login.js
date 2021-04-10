@@ -3,10 +3,6 @@ import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import { AppContext } from "../context";
 
-const GLOBAL = require('../Globals');
-
-
-
 export default function Login() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -18,7 +14,7 @@ export default function Login() {
 
 
     useEffect(() => {
-        console.log("Login111");
+        console.log("Login");
     }, []);
 
     const onClickLogin = async(event) => {
@@ -31,7 +27,7 @@ export default function Login() {
             password: password,            
           };
       
-        axios.post(GLOBAL.BASE_URL + `login`, data )
+        axios.post(`login`, data )
             .then(res => {
                 var data = res.data;
                 console.log(data);

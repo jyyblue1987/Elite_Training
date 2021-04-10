@@ -4,7 +4,8 @@ import {
   } from "react-router-dom";
 
 export default function AuthenticatedRoute({ component: C, appProps, ...rest }) {
-    
+    if( !appProps.isAuthenticated )
+      console.log("AuthenticatedRoute", appProps.isAuthenticated, C);
     return (
       <Route
         {...rest}

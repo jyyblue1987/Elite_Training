@@ -24,11 +24,9 @@ import {
 function App() {
 	const [isAuthenticated, userHasAuthenticated] = useState(false);
 	
-	useEffect(() => {
-		console.log("Login");		
+	useEffect(() => {			
 		var flag = localStorage.getItem("login_flag");
-		console.log(flag);
-		userHasAuthenticated(flag);
+		userHasAuthenticated(flag === "true");
     }, []);
 
   return (

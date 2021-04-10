@@ -4,13 +4,16 @@ import {
   } from "react-router-dom";
 
 export default function UnauthenticatedRoute({ component: C, appProps, ...rest }) {    
-    // if( !appProps.isAuthenticated )
-    //     console.log("UnauthenticatedRoute", appProps.isAuthenticated, C);
+    const isAuthenticated = appProps.isAuthenticated;
+
+    if( !isAuthenticated )
+        console.log("UnauthenticatedRoute", isAuthenticated, C);
+
     return (
       <Route
         {...rest}
         render={props =>
-            !appProps.isAuthenticated
+            isAuthenticated === false
             ? <C {...props} {...appProps} />
             : <Redirect to="/" />}
       />

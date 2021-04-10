@@ -1,4 +1,5 @@
 export default function Home() {
+    
     return (
         <div className="text-center">
             <h1 className="font-bold text-3xl mt-8 w-full text-gray-600">

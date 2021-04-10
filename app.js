@@ -94,7 +94,25 @@ app.post('/workout/add', (req, res) => {
           res.send({code: 200});      
         });      
   } else {
-      res.send({code: 201, message: 'Unauthorized User'});            
+      res.send({code: 202, message: 'Unauthorized User'});            
+  }
+});
+
+app.post('/workout/category', (req, res) => {
+  // add new workout, if user is not logged in, redirect into login page
+  var data = req.body;
+
+  var user_id = req.header('Authorization');
+
+  if (user_id) {
+      // add new article
+      data.user_id = user_id;
+
+      workout.findByCategory(data.category, function(data) {
+          res.send({code: 200, list: data});      
+        });      
+  } else {
+      res.send({code: 202, message: 'Unauthorized User'});            
   }
 });
 

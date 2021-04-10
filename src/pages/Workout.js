@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import axios from 'axios';
 
 import {
@@ -10,11 +10,7 @@ export default function Workout() {
     let { category } = useParams();
     console.log(category);
 
-    useEffect(() => {			
-        getWorkoutList()
-    });
-
-    const getWorkoutList = async() => {
+    const getWorkoutList = useCallback(async() => {
         const data = {
             category: category,          
         };
@@ -25,8 +21,12 @@ export default function Workout() {
         console.log(res);
 
         setWorklist(res.list);
-    }
+    }, [category])
 
+    useEffect(() => {			
+        getWorkoutList()
+        // eslint-disable-next-line no-use-before-define
+    }, [getWorkoutList]);
 
     return (
         <div>
@@ -52,7 +52,7 @@ export default function Workout() {
                             worklist && worklist.map((item, key) => {
                                 return (
                                     <div className="bg-white p-2 rounded mt-1 border-b border-grey cursor-pointer hover:bg-grey-lighter" key={key}>
-                                        <a href="/lifting/alarm" className="text-base font-medium underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+                                        <a href={"/detail/workout/" + item._id} className="text-base font-medium underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
                                             {key + 1}. {item.title}
                                         </a>
                                     </div>            

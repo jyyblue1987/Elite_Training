@@ -25,4 +25,15 @@ function findByCategory(category, callback) {
         });
 }
 
-module.exports = {add, findByCategory};
+// find workout by username
+function findById(_id, callback) {
+    Workout.findOne({_id: _id})
+        .then(function(data) {
+            callback(data);
+        })
+        .catch(function(error) {
+            callback(null);
+        });
+}
+
+module.exports = {add, findByCategory, findById};

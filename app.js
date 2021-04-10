@@ -116,6 +116,23 @@ app.post('/workout/category', (req, res) => {
   }
 });
 
+app.post('/workout/detail', (req, res) => {
+  // add new workout, if user is not logged in, redirect into login page
+  var data = req.body;
+
+  var user_id = req.header('Authorization');
+
+  if (user_id) {
+      // add new article
+      data.id = user_id;
+
+      workout.findById(data._id, function(data) {
+          res.send({code: 200, data: data});      
+        });      
+  } else {
+      res.send({code: 202, message: 'Unauthorized User'});            
+  }
+});
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {

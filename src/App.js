@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Lifting from './pages/Lifting'
 import Workout from './pages/Workout'
 import WorkoutAdd from './pages/WorkoutAdd'
+import WorkoutDetail from './pages/WorkoutDetail'
 import Weather from './pages/Weather'
 import AuthenticatedRoute from './AuthenticatedRoute'
 import UnauthenticatedRoute from './UnauthenticatedRoute'
@@ -70,6 +71,11 @@ function App() {
 					<AuthenticatedRoute 
 						path="/add/workout/:category" 
 						component={WorkoutAdd} 
+						appProps={{ isAuthenticated }} 
+						/>	
+					<AuthenticatedRoute 
+						path="/detail/workout/:id" 
+						component={WorkoutDetail} 
 						appProps={{ isAuthenticated }} 
 						/>	
 

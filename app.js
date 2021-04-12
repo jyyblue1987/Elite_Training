@@ -2,6 +2,7 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const fetch = require('node-fetch');
 const path = require('path');
 const app = express();
 app.use(express.static(path.join(__dirname, 'build')));
@@ -151,14 +152,42 @@ app.post('/weather/add', (req, res) => {
           res.send({code: 201, message: err.message});      
         },
         function(data) {
-          weather.findByUserId(user_id, function(data) {
-            res.send({code: 200, list: data});      
+          weather.findByUserId(user_id, async function(data) {
+            var result = await getWeatherData(data);
+            res.send({code: 200, list: result});      
           });     
         });      
   } else {
       res.send({code: 202, message: 'Unauthorized User'});            
   }
 });
+
+async function getWeatherData(list) {
+  var API_KEY = 'eb8ba848f5d59614a31f13987ddf8e37';
+  var BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?appid='+API_KEY;
+  var result = [];
+  for(var i = 0; i < list.length; i++ )
+  { 
+    var item = list[i];
+    var url = BASE_URL + '&q=' + item.location;
+
+    try 
+    {
+      const response = await fetch(url);
+      const json = await response.json();
+      console.log(url, json);
+
+      item['weather'] = json;      
+      result.push(json);
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
+  }
+
+  return result;
+}
 
 app.post('/weather/list', (req, res) => {
   // add new workout, if user is not logged in, redirect into login page
@@ -170,8 +199,9 @@ app.post('/weather/list', (req, res) => {
       // add new article
       data.user_id = user_id;
 
-      weather.findByUserId(user_id, function(data) {
-          res.send({code: 200, list: data});      
+      weather.findByUserId(user_id, async function(data) {
+          var result = await getWeatherData(data);
+          res.send({code: 200, list: result});      
         });      
   } else {
       res.send({code: 202, message: 'Unauthorized User'});            

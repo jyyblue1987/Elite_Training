@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 const GLOBAL = require('./Globals');
 axios.defaults.baseURL = GLOBAL.BASE_URL;
-
+// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 axios.interceptors.request.use(function (config) {  
     const token = localStorage.getItem('user_id');                                      
     config.headers.Authorization =  token;    

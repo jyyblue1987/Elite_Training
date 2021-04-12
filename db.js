@@ -43,13 +43,26 @@ const WorkoutSchema = new Schema({
     }
 });
 
+const WeatherSchema = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'userId is required']
+    },
+    location: {
+        type: String
+    },    
+});
+
+
 
 // register your model
 const User = mongoose.model('User', UserSchema);
-const Workout = mongoose.model('Workouot', WorkoutSchema);
+const Workout = mongoose.model('Workout', WorkoutSchema);
+const Weather = mongoose.model('Weather', WeatherSchema);
 
 mongoose.connect('mongodb://localhost:27017/hw07', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(function() {
     console.log('DB connected');
 });
 
-module.exports = {User, Workout};
+module.exports = {User, Workout, Weather};

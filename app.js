@@ -10,6 +10,7 @@ require('./db');
 
 const auth = require('./auth.js');
 const workout = require('./models/workout.js');
+const weather = require('./models/weather.js');
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -133,6 +134,50 @@ app.post('/workout/detail', (req, res) => {
       res.send({code: 202, message: 'Unauthorized User'});            
   }
 });
+
+
+app.post('/weather/add', (req, res) => {
+  // add new workout, if user is not logged in, redirect into login page
+  var data = req.body;
+
+  var user_id = req.header('Authorization');
+
+  if (user_id) {
+      // add new article
+      data.user_id = user_id;
+
+      weather.add(user_id, data.location,
+        function(err) {
+          res.send({code: 201, message: err.message});      
+        },
+        function(data) {
+          weather.findByUserId(user_id, function(data) {
+            res.send({code: 200, list: data});      
+          });     
+        });      
+  } else {
+      res.send({code: 202, message: 'Unauthorized User'});            
+  }
+});
+
+app.post('/weather/list', (req, res) => {
+  // add new workout, if user is not logged in, redirect into login page
+  var data = req.body;
+
+  var user_id = req.header('Authorization');
+
+  if (user_id) {
+      // add new article
+      data.user_id = user_id;
+
+      weather.findByUserId(user_id, function(data) {
+          res.send({code: 200, list: data});      
+        });      
+  } else {
+      res.send({code: 202, message: 'Unauthorized User'});            
+  }
+});
+
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {

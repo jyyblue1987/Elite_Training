@@ -1,10 +1,66 @@
 
+import {useEffect, useState, useCallback} from 'react';
+import axios from 'axios';
+
 export default function Weather() {
+    const [location, setLocation] = useState("");
+    const [locationList, setLocationList] = useState([]);
+
+    
+    const getWeatherList = useCallback(async() => {
+        const data = {
+            
+        };
+
+        var result = await axios.post(`weather/list`, data );
+
+        var res = result.data;
+        console.log(res);
+
+        setLocationList(res.list);
+    }, [])
+
+    useEffect(() => {			
+        getWeatherList()
+        // eslint-disable-next-line no-use-before-define
+    }, [getWeatherList]);
+
+    const onClickSubmit = async(event) => {
+        event.preventDefault();
+
+        console.log("onClickSubmit");
+
+        const data = {
+            location: location,            
+        };
+
+        var result = await axios.post(`weather/add`, data );
+
+        var res = result.data;
+        if( res.code === 200 )
+        {
+            setLocation("");
+            setLocationList(res.list);
+        }
+        else
+        {
+        }
+    }
+
+    
+   
     return (
         <div className="text-center">                             
             <form>
-                <input className="border-b-2 border-gray-400 focus:outline-none py-2 px-4" type="text" placeholder="Search for a city" autofocus/>                        
-                <button class="bg-blue-500 ml-4 px-4 py-2 text-lg font-semibold tracking-wider text-white rounded hover:bg-blue-600">Submit</button>                
+                <input className="border-b-2 border-gray-400 focus:outline-none py-2 px-4" type="text" placeholder="Search for a city" autofocus
+                    onChange={(event) => setLocation(event.target.value)}
+                    value={location}
+                    />                        
+                <button class="bg-blue-500 ml-4 px-4 py-2 text-lg font-semibold tracking-wider text-white rounded hover:bg-blue-600"
+                    onClick={(event) => {onClickSubmit(event);}}
+                    >
+                        Submit
+                </button>                
             </form>           
             <div className="mx-auto p-10 flex justify-center">
                 <div class="w-64 m-2 cursor-pointer border b-gray-400 rounded flex flex-col justify-center items-center text-center p-6 bg-white">

@@ -50,11 +50,11 @@ export default function Weather() {
     return (
         <div className="text-center">                             
             <form>
-                <input className="border-b-2 border-gray-400 focus:outline-none py-2 px-4" type="text" placeholder="Search for a city" autofocus
+                <input className="border-b-2 border-gray-400 focus:outline-none py-2 px-4" type="text" placeholder="Search for a city" autoFocus
                     onChange={(event) => setLocation(event.target.value)}
                     value={location}
                     />                        
-                <button class="bg-blue-500 ml-4 px-4 py-2 text-lg font-semibold tracking-wider text-white rounded hover:bg-blue-600"
+                <button className="bg-blue-500 ml-4 px-4 py-2 text-lg font-semibold tracking-wider text-white rounded hover:bg-blue-600"
                     onClick={(event) => {onClickSubmit(event);}}
                     >
                         Submit
@@ -63,21 +63,25 @@ export default function Weather() {
 
 
 
-            <div className="mx-auto p-10 flex justify-center">
+            <div className="mx-auto p-10 grid grid-cols-3 gap-4 auto-cols-max">
 
                 {
                     locationList && locationList.map((item, key) => {
                         return (
-                            <div class="w-80 m-2 cursor-pointer border b-gray-400 rounded flex flex-col justify-center items-center text-center p-6 bg-white">
-                                <div class="text-md font-bold flex flex-col text-gray-900">
+                            <div className="cursor-pointer border b-gray-400 rounded justify-center items-center text-center p-6 bg-white" key={key}>
+                                <div className="text-md font-bold flex flex-col text-gray-900">
                                     <span>{item['name']}</span>                         
                                 </div>
                                 
-                                <div class="text-3xl font-bold text-gray-900 mb-6">{item['main']['temp_max']}ºF<span class="font-normal text-gray-700 mx-1">/</span>{item['main']['temp_min']}ºF</div>
+                                <div className="text-3xl font-bold text-gray-900 mb-6">
+                                    {Math.round(item['main']['temp_min'] - 272.15, 1)}º
+                                    <span className="font-normal text-gray-700 mx-1">/</span>
+                                    {Math.round(item['main']['temp_max'] - 272.15, 1)}º
+                                </div>
                                 <div className="mx-auto">
-                                    <svg class="h-20 block" viewBox="0 0 81 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
-                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <g id="Desktop-HD" transform="translate(-174.000000, -308.000000)" fill-rule="nonzero">
+                                    <svg className="h-20 block" viewBox="0 0 81 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+                                            <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                                                <g id="Desktop-HD" transform="translate(-174.000000, -308.000000)" fillRule="nonzero">
                                                     <g id="Group" transform="translate(95.000000, 222.000000)">
                                                         <g id="2" transform="translate(79.000000, 86.000000)">
                                                             <path d="M35.288454,26.4312368 C34.8062502,27.5960191 33.4711041,28.1493583 32.3063218,27.6671545 C31.1415395,27.1849507 30.5882004,25.8498046 31.0704042,24.6850223 C33.990421,17.6316069 40.8868442,12.9347826 48.6521739,12.9347826 C59.1575903,12.9347826 67.673913,21.4511053 67.673913,31.9565217 C67.673913,34.1117269 67.3144924,36.2210565 66.6187558,38.217674 C66.2039356,39.4081203 64.90261,40.0368896 63.7121636,39.6220695 C62.5217172,39.2072493 61.8929479,37.9059237 62.3077681,36.7154773 C62.8357821,35.2001886 63.1086957,33.5985422 63.1086957,31.9565217 C63.1086957,23.9724052 56.6362904,17.5 48.6521739,17.5 C42.7496023,17.5 37.5080182,21.0697924 35.288454,26.4312368 Z M71.2488471,9.35984851 C72.1402613,10.2512627 72.1402613,11.6965305 71.2488471,12.5879447 L68.020751,15.8160409 C67.1293368,16.707455 65.6840689,16.707455 64.7926548,15.8160409 C63.9012406,14.9246267 63.9012406,13.4793588 64.7926548,12.5879447 L68.020751,9.35984851 C68.9121651,8.46843437 70.357433,8.46843437 71.2488471,9.35984851 Z M48.6521739,0 C49.9128239,0 50.9347826,1.02195872 50.9347826,2.2826087 L50.9347826,6.84782609 C50.9347826,8.10847606 49.9128239,9.13043478 48.6521739,9.13043478 C47.3915239,9.13043478 46.3695652,8.10847606 46.3695652,6.84782609 L46.3695652,2.2826087 C46.3695652,1.02195872 47.3915239,0 48.6521739,0 Z M80.6086957,31.9565217 C80.6086957,33.2171717 79.5867369,34.2391304 78.326087,34.2391304 L73.7608696,34.2391304 C72.5002196,34.2391304 71.4782609,33.2171717 71.4782609,31.9565217 C71.4782609,30.6958718 72.5002196,29.673913 73.7608696,29.673913 L78.326087,29.673913 C79.5867369,29.673913 80.6086957,30.6958718 80.6086957,31.9565217 Z M26.0555007,9.35984851 C26.9469148,8.46843437 28.3921827,8.46843437 29.2835969,9.35984851 L32.511693,12.5879447 C33.4031072,13.4793588 33.4031072,14.9246267 32.511693,15.8160409 C31.6202789,16.707455 30.175011,16.707455 29.2835969,15.8160409 L26.0555007,12.5879447 C25.1640865,11.6965305 25.1640865,10.2512627 26.0555007,9.35984851 L26.0555007,9.35984851 Z" id="Shape" fill="#FECA57"></path>
@@ -88,7 +92,7 @@ export default function Weather() {
                                             </g>
                                     </svg>
                                 </div>
-                                <p class="text-gray-700 pt-2 mb-2">{item['weather'][0]['description']}</p>
+                                <p className="text-gray-700 pt-2 mb-2">{item['weather'][0]['description']}</p>
                             </div>             
                         )
                     })
